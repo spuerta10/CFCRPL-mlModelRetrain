@@ -39,7 +39,7 @@ jobs:
     - name: Upload to dev Google Cloud Storage Bucket
       if: github.ref == 'refs/heads/dev'
       run: |
-        gsutil cp mlmodelretrain.zip ${{ env.DEV_GCS }}/mlmodelretrain.zip
+        gsutil cp mlmodelretrain.zip ${{ env.DEV_GCS }}/
 
     - name: Upload to prd Google Cloud Storage Bucket
       if: github.ref == 'refs/heads/main'
