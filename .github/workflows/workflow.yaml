@@ -30,21 +30,8 @@ jobs:
       with:
         credentials_json: ${{ secrets.SERVICE_ACCOUNT_KEY }}
 
-    - name: Set up Cloud SDK
-      uses: google-github-actions/setup-gcloud@v2
+    - name: Upload ZIP to GCS
+      uses: google-github-actions/upload-cloud-storage@v2
       with:
-        project_id: ${{ env.GCP_PROJECTID }}
-
-    - name: Config Docker
-      run: |
-        gcloud auth configure-docker
-  
-    - name: Upload to dev Google Cloud Storage Bucket
-      if: github.ref == 'refs/heads/dev'
-      run: |
-        gsutil cp mlmodelretrain.zip ${{ env.DEV_GCS }}/
-
-    - name: Upload to prd Google Cloud Storage Bucket
-      if: github.ref == 'refs/heads/main'
-      run: |
-        gsutil cp mlmodelretrain.zip $MAIN_GCS/mlmodelretrain.zip
+        path: './mlmodelretrain.zip'
+        destination: ${{ env.DEV_GCS }}
