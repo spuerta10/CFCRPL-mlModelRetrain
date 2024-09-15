@@ -20,7 +20,7 @@ jobs:
       uses: actions/checkout@v2
     
     - name: Zip repos code 
-      run: zip -r ./mlmodelretrain.zip source/
+      run: zip -r mlmodelretrain.zip .
 
     - name: Echo dir
       run: dir .
