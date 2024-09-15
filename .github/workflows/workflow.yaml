@@ -9,7 +9,7 @@ on:
 env:
   GCP_PROJECTID: creditriskmlops
   DEV_GCS: creditriskmlops-mlmodelretrain-dev
-  MAIN_GCS: gs://creditriskmlops-mlmodelretrain-prd
+  MAIN_GCS: creditriskmlops-mlmodelretrain-prd
 
 jobs:
   build: 
@@ -30,8 +30,16 @@ jobs:
       with:
         credentials_json: ${{ secrets.SERVICE_ACCOUNT_KEY }}
 
-    - name: Upload ZIP to GCS
+    - name: Upload ZIP to DEV GCS
+      if: github.ref == 'refs/heads/dev'
       uses: google-github-actions/upload-cloud-storage@v2
       with:
         path: './mlmodelretrain.zip'
         destination: ${{ env.DEV_GCS }}
+
+    - name: Upload ZIP to PRD GCS
+      if: github.ref == 'refs/heads/dev'
+      uses: google-github-actions/upload-cloud-storage@v2
+      with:
+        path: './mlmodelretrain.zip'
+        destination: ${{ env.MAIN_GCS }}
