@@ -8,7 +8,7 @@ on:
 
 env:
   GCP_PROJECTID: creditriskmlops
-  DEV_GCS: gs://creditriskmlops-mlmodelretrain-dev
+  DEV_GCS: creditriskmlops-mlmodelretrain-dev
   MAIN_GCS: gs://creditriskmlops-mlmodelretrain-prd
 
 jobs:
